@@ -1,0 +1,50 @@
+<h1 style="text-align:center"> Todo List </h1>
+<div style="text-align:center">
+You have accomplished {{accomplishedTasks.length}} out of {{tasks.length + accomplishedTasks.length}} tasks
+<br>{{(accomplishedTasks.length / (tasks.length + accomplishedTasks.length)) * 100}}% complete
+</div>
+<div style="text-align:center">
+  <p>
+  Add New Task?
+  <div>
+    <form (submit)="addTask(title.value, status.value)">
+    Title: <input type = "text" #title>
+    Status: <select #status>
+            <option>Pending</option>
+            <option>Done</option>
+            </select>
+    </form>
+    <p><button (click)="addTask(title.value, status.value)">Add Task</button>             
+    <p>{{errMsg}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="column" style="background-color:#E6DCBF;overflow:scroll;">
+    <h2 style="text-align:center">Pending Tasks</h2>
+    <table id="tasks" >
+      <tr>
+        <th>Task</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngFor = "let task of tasks; let i = index" >
+        <td>{{i+1}}. {{task.title}}</td>
+        <td>{{task.status}}</td>
+        <td><button (click)="onDone(task.title, task.status)">Done</button>
+            <button (click)="onRemove(task.title, task.status)">Remove</button></td>
+      </tr>       
+    </table>
+  </div>
+  <div class="column2" style="background-color:#E6DCBF;overflow:scroll;">
+    <h2 style="text-align:center">Accomplished Tasks</h2>
+    <table  align="center" id = "accomplishments">
+      <tr>
+        <th>Task</th>
+        <th>Status</th>
+      </tr>
+      <tr *ngFor = "let atask of accomplishedTasks; let i = index">
+        <td>{{i+1}}. {{atask.title}}</td>
+        <td>{{atask.status}}</td>
+    </table>
+</div>
